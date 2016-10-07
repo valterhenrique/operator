@@ -13,12 +13,29 @@ Download the latest version of [Vagrant][1].
 sudo dpkg -i vagrant_1.8.6_x86_64.deb
 ```
 
+#### Install the following plugins
+
+Install [vagrant-vbguest][4]:
+
+```
+vagrant plugin install vagrant-vbguest
+```
+
 ### 2. Download Virtualbox
 
 Download the latest version of [Virtualbox][2].
 
 ```
 sudo dpkg -i virtualbox-5.1_5.1.6-110634~Ubuntu~trusty_amd64.deb
+```
+
+## 3. Environment
+
+Specify an environment variable called OPERATOR_HOME at your system.
+Example for Ubuntu:
+
+```
+export OPERATOR_HOME="$HOME/git/valter/operator"
 ```
 
 ## A bit more of
@@ -74,9 +91,20 @@ config.vm.provision "shell", inline: <<-SHELL
 SHELL
 ```
 
+> Checking for guest additions in VM...
+> The guest additions on this VM do not match the installed version of VirtualBox!
+> In most cases this is fine, but in rare cases it can prevent things such as shared folders from working properly.
+> If you see shared folder errors, please make sure the guest additions within the virtual machine match the version of VirtualBox you have installed on your host and reload your VM.
+
+```
+Guest Additions Version: 4.3.36
+VirtualBox Version: 5.1
+```
+
 License: [GNU General Public Lincense][0]
 
 [0]: https://www.gnu.org/licenses/gpl-3.0.en.html
 [1]: https://www.vagrantup.com/downloads.html
 [2]: https://www.virtualbox.org/wiki/Downloads
 [3]: https://atlas.hashicorp.com/search
+[4]: https://github.com/dotless-de/vagrant-vbguest
