@@ -1,22 +1,30 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.configure("2") do |config|
+require (ENV['OPERATOR_HOME'] + '/vagrant/lib/common/module/paths.rb')
+include CommonPaths
 
-  config.vm.box = "ubuntu/trusty64"
+Vagrant.configure("2") do |vagrant|
+  vm = SETTINGS['local']['vm']
+  jenkins = SETTINGS['local']['server']['jenkins']
 
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
-  config.vm.network "private_network", ip: "192.168.33.10"
+  vagrant.vm.box = vm['box']
+  # vagrant.vm.network "forwarded_port", guest: 80, host: 8080
+  vagrant.vm.network "private_network", ip: jenkins['ip']
 
-  config.vm.synced_folder '.', '/vagrant', disabled:true
-   # config.vm.synced_folder "../data", "/vagrant_data"
+  vagrant.vm.synced_folder '.', '/vagrant', disabled:true
 
-  config.vm.provider "virtualbox" do |vb|
+  vagrant.vm.provider "virtualbox" do |vb|
     # Customize the amount of memory on the VM:
-    vb.memory = "4016"
-    vb.hostname = 'jenkins'
+    vb.memory = jenkins['memory']
+    vb.cpus = jenkins['cpus']
+    vb.name = jenkins['hostname']
+
   end
 
-  config.ssh.insert_key = false
+  vagrant.ssh.insert_key = false
+  vagrant.vbguest.auto_update = SETTINGS['local']['vbguest']['auto_update']
+
+  eval File.read( COMMON + '/provision.rb' )
 
 end
