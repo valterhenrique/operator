@@ -1,0 +1,30 @@
+operator:
+  branch: master
+
+local:
+  vm:
+    box:
+      "ubuntu/trusty64"
+    network:
+      "public_network"
+    bridge:
+      "wlan0"
+  server:
+    jenkins:
+      hostname:
+        "local.jenkins.matrix.io"
+      ip:
+        "192.168.33.10"
+      memory:
+        4096
+      cpus:
+        2
+  vbguest:
+    auto_update:
+      false
+password:
+  operator:
+      "9a5af59d95a06260288e5b33e13dd691ec2d291b0eb64b32ae6446a3c0458654450fe5e14273e98c"
+  jenkins:
+    ssh:
+      "b7a6e68827dcbcc601cf3b9d96d777178ff8d426169cdad22c75cfbb583fc70fb2a18c364058bdc3"
