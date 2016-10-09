@@ -29,13 +29,20 @@ Download the latest version of [Virtualbox][2].
 sudo dpkg -i virtualbox-5.1_5.1.6-110634~Ubuntu~trusty_amd64.deb
 ```
 
-## 3. Environment
+## 3. Clone
 
-Specify an environment variable called OPERATOR_HOME at your system.
-Example for Ubuntu:
+Clone the repository:
 
 ```
-export OPERATOR_HOME="$HOME/git/valter/operator"
+git clone https://github.com/valterhenrique/operator.git
+```
+
+Now, you need to specify an environment variable called OPERATOR_HOME at your system.
+Which means, the repository location at your system.
+Example for my system, add it at your `~/.profile` file:
+
+```
+export OPERATOR_HOME="$HOME/git/operator"
 ```
 
 ## A bit more of
@@ -109,14 +116,14 @@ config.vbguest.auto_update = false
 
 ### Security
 
-In order to make your application safer, after forking this project, you must generate another SSH key for your 'operator' user:
+In order to make your application safer, after cloning this project, you must generate another SSH key for your `operator` user:
 
 ```
 ssh-keygen -t rsa -b 4096 -C 'operator@deploy'
 ```
 
 Copy the private and public keys at `vagrant/lib/synced/ssh/operator/`.
-
+This will be used as your `deploy key`, in order to clone the repository inside of your new VMs.
 
 License: [GNU General Public Lincense][0]
 
