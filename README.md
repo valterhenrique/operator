@@ -101,6 +101,23 @@ Guest Additions Version: 4.3.36
 VirtualBox Version: 5.1
 ```
 
+> For vagrant.vbguest, set auto_update to false, if you do NOT want to check the correct additions version when booting this machine
+
+```
+config.vbguest.auto_update = false
+```
+
+### Security
+
+In order to make your application safer, after forking this project, you must generate another SSH key for your 'operator' user:
+
+```
+ssh-keygen -t rsa -b 4096 -C 'operator@deploy'
+```
+
+Copy the private and public keys at `vagrant/lib/synced/ssh/operator/`.
+
+
 License: [GNU General Public Lincense][0]
 
 [0]: https://www.gnu.org/licenses/gpl-3.0.en.html
