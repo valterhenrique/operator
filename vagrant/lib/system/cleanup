@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -x
+
+remove_root_ssh_folder(){
+  rm -rf ~/.ssh/
+  rm -rf /root/.ssh/
+}
+
+disable_root_login(){
+  sed -i 's,PermitRootLogin yes,PermitRootLogin no,g' /etc/ssh/sshd_config
+  service ssh restart
+}
+
+remove_temporary_folders(){
+  rm -rf /tmp/operator.*
+}
+
+remove_root_ssh_folder
+disable_root_login
+remove_temporary_folders

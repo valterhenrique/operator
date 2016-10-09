@@ -1,0 +1,39 @@
+#!/bin/bash
+
+set -x
+
+update_system(){
+  # make sure that our system is up to date
+  apt-get -qq update
+}
+
+create_opt(){
+  # location where we gonna set our projects
+  if [[ ! -d /opt ]];then
+    mkdir --mode=755 /opt
+  fi
+}
+
+update_locale(){
+  dpkg-reconfigure locales
+
+  # reconfigure to your locale, if needed
+  # since I'm located in Germany, this is very useful
+  locale-gen de_DE.UTF-8
+}
+
+update_timezone(){
+  timedatectl set-timezone Europe/Berlin
+  # keeps the same timezone for /var/auth.log file
+  service rsyslog restart
+}
+
+auto_remove(){
+  apt-get -qq autoremove -y
+}
+
+update_system
+create_opt
+update_locale
+update_timezone
+auto_remove
